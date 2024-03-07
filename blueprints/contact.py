@@ -46,9 +46,8 @@ class Contact(MethodView):
 	@blp.arguments(schema=ContactUpdateSchema)
 	@blp.response(status_code=200, schema=ContactSchema)
 	def put(self, contact_data, contact_id):
-		contact = ContactModel.query.get(contact_id)
 
-		if contact:
+		if contact := ContactModel.query.get(contact_id):
 			contact.phone = contact_data["phone"] if contact_data.get("phone") else contact.phone
 			contact.email = contact_data["email"] if contact_data.get("email") else contact.email
 			contact.name = contact_data["name"] if contact_data.get("name") else contact.name
