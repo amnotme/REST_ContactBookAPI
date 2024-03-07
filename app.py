@@ -3,7 +3,7 @@ from flask_jwt_extended import JWTManager
 from flask_smorest import Api
 from db import db
 from config import Config
-from blueprints import ContactBluePrint
+from blueprints import ContactBluePrint, UserBluePrint
 
 def create_app(db_url=None):
 	app = Flask(__name__)
@@ -30,6 +30,7 @@ def _configure_db(app):
 def _configure_blueprints(app):
 	api = Api(app)
 	api.register_blueprint(ContactBluePrint)
+	api.register_blueprint(UserBluePrint)
 
 def _configure_jwt(app):
 	jwt = JWTManager(app)

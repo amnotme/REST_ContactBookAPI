@@ -1,2 +1,2 @@
 from schema.schemas import ContactSchema
-from schema.schemas import ContactUpdateSchema
+from schema.schemas import UserSchema
