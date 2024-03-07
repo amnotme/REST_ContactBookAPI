@@ -1,0 +1,1 @@
+from blueprints.contact import blp as ContactBluePrint
