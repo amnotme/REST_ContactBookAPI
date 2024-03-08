@@ -50,13 +50,13 @@ class Contact(MethodView):
 	@blp.arguments(schema=ContactSchema)
 	@blp.response(status_code=200, schema=ContactSchema)
 	def put(self, contact_data, contact_id):
-		contact = ContactModel.query.get(contact_id)
 
-		if contact:
+		if contact:= ContactModel.query.get(contact_id):
 			contact.phone = contact_data.get("phone", contact.phone)
 			contact.email = contact_data.get("email", contact.email)
 			contact.name = contact_data.get("name", contact.name)
 			contact.user_id = contact_data.get("user_id", contact.user_id)
+
 		else:
 			contact = ContactModel(
 				id=contact_id,
