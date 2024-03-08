@@ -46,7 +46,7 @@ class Contact(MethodView):
     @blp.response(status_code=200, schema=ContactSchema)
     def get(self, contact_id):
         return ContactModel.query.get_or_404(
-            contact_id, description=f"Contact was not found"
+            contact_id, description="Contact was not found"
         )
 
     @jwt_required()
@@ -86,7 +86,7 @@ class Contact(MethodView):
     def delete(self, contact_id):
 
         contact = ContactModel.query.get_or_404(
-            contact_id, description=f"Contact was not found"
+            contact_id, description="Contact was not found"
         )
 
         try:
