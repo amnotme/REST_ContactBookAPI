@@ -12,6 +12,8 @@ flask-migrate = "*"
 sqlalchemy = "*"
 passlib = "*"
 python-dotenv = "*"
+pytest = "*"
+flask-testing = "*"
 
 [dev-packages]
 
