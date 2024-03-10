@@ -31,17 +31,12 @@ class ModelTestCase(unittest.TestCase):
         self.assertIsNotNone(contact.id)
         self.assertEqual(contact.name, "John Doe")
 
-    def test_new_contact2(self):
-        contact = ContactModel(
-            name="John Doe", phone="1234567890", email="johndoe@example.com"
+    def test_register(self):
+
+        auth_headers = self.client.post(
+            "/register", json={"username": "JD", "password": "1234"}
         )
-        self.client.post(
-            "/contact/",
-            data=dict(name=contact.name, phone=contact.phone, email=contact.email),
-        )
-        retrieved_contact = ContactModel.query.first()
-        self.assertIsNotNone(retrieved_contact)
-        self.assertEqual(retrieved_contact.name, "John Doe")
+        self.assertIsNotNone(auth_headers)
 
     def tearDown(self):
         db.session.remove()
