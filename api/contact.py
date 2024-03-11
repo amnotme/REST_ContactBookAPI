@@ -16,7 +16,7 @@ class ContactList(MethodView):
     @jwt_required()
     @blp.response(status_code=200, schema=ContactSchema(many=True))
     def get(self):
-        contacts = ContactModel.query.all()
+        contacts = db.session.query(ContactModel).all()
         return contacts
 
     @jwt_required()
@@ -45,16 +45,14 @@ class Contact(MethodView):
     @jwt_required()
     @blp.response(status_code=200, schema=ContactSchema)
     def get(self, contact_id):
-        return ContactModel.query.get_or_404(
-            contact_id, description="Contact was not found"
-        )
+        return db.get_or_404(ContactModel, contact_id)
 
     @jwt_required()
     @blp.arguments(schema=ContactSchema)
     @blp.response(status_code=200, schema=ContactSchema)
     def put(self, contact_data, contact_id):
 
-        if contact := ContactModel.query.get(contact_id):
+        if contact := db.session.get(ContactModel, contact_id):
             contact.phone = contact_data.get("phone", contact.phone)
             contact.email = contact_data.get("email", contact.email)
             contact.name = contact_data.get("name", contact.name)
@@ -85,9 +83,7 @@ class Contact(MethodView):
     )
     def delete(self, contact_id):
 
-        contact = ContactModel.query.get_or_404(
-            contact_id, description="Contact was not found"
-        )
+        contact = db.session.get(ContactModel, contact_id)
 
         try:
             db.session.delete(contact)
