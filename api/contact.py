@@ -45,7 +45,7 @@ class Contact(MethodView):
     @jwt_required()
     @blp.response(status_code=200, schema=ContactSchema)
     def get(self, contact_id):
-        return db.session.get(ContactModel, contact_id)
+        return db.get_or_404(ContactModel, contact_id)
 
     @jwt_required()
     @blp.arguments(schema=ContactSchema)

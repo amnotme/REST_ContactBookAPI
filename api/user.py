@@ -64,6 +64,7 @@ class UserLogin(MethodView):
 
     @blp.arguments(schema=UserSchema)
     def post(self, user_data):
+
         user = UserModel.query.filter(
             UserModel.username == user_data["username"]
         ).first()

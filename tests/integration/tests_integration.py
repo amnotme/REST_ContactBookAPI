@@ -99,7 +99,6 @@ class IntegrationTestsCase(TestBase):
             self.assertEqual(first=1, second=response.json["id"])
 
         def update_contact():
-
             response = self.client.put(
                 "/contact/1",
                 headers=self.access_token,
