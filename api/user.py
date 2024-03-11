@@ -17,7 +17,7 @@ class UserList(MethodView):
     @jwt_required()
     @blp.response(status_code=200, schema=UserSchema(many=True))
     def get(self):
-        users = UserModel.query.all()
+        users = db.session.query(UserModel).all()
         return users
 
 
@@ -27,7 +27,7 @@ class User(MethodView):
     @jwt_required()
     @blp.response(status_code=200, schema=UserSchema)
     def get(self, user_id):
-        user = UserModel.query.get_or_404(user_id)
+        user = db.get_or_404(UserModel, user_id)
         return user
 
 
